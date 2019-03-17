@@ -53,11 +53,35 @@ Role Variables
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+```yaml
+- hosts: 127.0.0.1
+  connection: local
+  vars:
+    ryezone_labs_external_dns:
+      - 1.1.1.1
+      - 1.0.0.1
+    ryezone_labs_lanInterface: eth1
+    ryezone_labs_top_level_domain: domain.local
+    dhcp_subnets:
+      - interface: "{{ ryezone_labs_lanInterface }}"
+        address: 10.100.10.1
+        network: 10.100.10.0
+        netmask: 255.255.255.0
+        broadcast: 10.100.10.255
+        range:
+          start: 10.100.10.100
+          end: 10.100.10.250
+    dhcp_hosts:
+      - name: router
+        mac_address: 00:35:10:00:00:01
+        fixed_address: 10.100.10.1
+    dhcp_default_lease_time: 600  
+    dhcp_max_lease_time: 7200
+    dhcp_authoritative: true
+    dhcp_log_facility: local7
+  roles:
+   - ryezone_labs.dhcp
+```
 
 License
 -------
