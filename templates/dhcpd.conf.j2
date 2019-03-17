@@ -70,6 +70,6 @@ subnet {{ subnet.network }} netmask {{ subnet.netmask }} {
 host {{ host.name }} {
     hardware ethernet {{ host.mac_address }};
     fixed-address {{ host.fixed_address }};
-    server-name "{{ host.name }}.{{ dhcpdConf.option.domain_name }}";
+    server-name "{{ host.name }}.{{ ryezone_labs_top_level_domain }}";
 }
 {% endfor %}
