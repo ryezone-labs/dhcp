@@ -1,0 +1,6 @@
+---
+# handlers file for dhcp
+- name: restart isc-dhcp-server
+  service:
+    name: isc-dhcp-server
+    state: restarted
