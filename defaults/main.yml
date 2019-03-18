@@ -4,22 +4,28 @@ ryezone_labs_external_dns:
   - 1.1.1.1
   - 1.0.0.1
 ryezone_labs_lanInterface: eth1
+ryezone_labs_lanAddress: 10.100.10.1
+ryezone_labs_lanNetwork: 10.100.10.0
+ryezone_labs_lanNetmask: 255.255.255.0
+ryezone_labs_lanBroadcast: 10.100.10.255
+ryezone_labs_lanDhcpRangeStart: 10.100.10.100
+ryezone_labs_lanDhcpRangeEnd: 10.100.10.250
 ryezone_labs_top_level_domain: domain.local
 
 dhcp_subnets:
   - interface: "{{ ryezone_labs_lanInterface }}"
-    address: 10.100.10.1
-    network: 10.100.10.0
-    netmask: 255.255.255.0
-    broadcast: 10.100.10.255
+    address: "{{ ryezone_labs_lanAddress }}"
+    network: "{{ ryezone_labs_lanNetwork }}"
+    netmask: "{{ ryezone_labs_lanNetmask }}"
+    broadcast: "{{ ryezone_labs_lanBroadcast }}"
     range:
-      start: 10.100.10.100
-      end: 10.100.10.250
+      start: "{{ ryezone_labs_lanDhcpRangeStart }}"
+      end: "{{ ryezone_labs_lanDhcpRangeEnd }}"
 
 dhcp_hosts:
   - name: router
     mac_address: 00:35:10:00:00:01
-    fixed_address: 10.100.10.1
+    fixed_address: "{{ ryezone_labs_lanAddress }}"
 
 dhcp_default_lease_time: 600  
 dhcp_max_lease_time: 7200
